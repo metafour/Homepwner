@@ -18,7 +18,7 @@
     self = [super initWithStyle:UITableViewStylePlain];
     
     if (self) {
-        for (int i = 0; i < 15; i++) {
+        for (int i = 0; i < 5; i++) {
             [[ItemStore sharedStore] createItem];
         }
     }
@@ -43,16 +43,9 @@
 {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-    BNRItem *item;
   
-  if (indexPath.section == 0) {
-    item = [[[ItemStore sharedStore] itemsBelowValue:50] objectAtIndex:indexPath.row];
-  } else {
-    item = [[[ItemStore sharedStore] itemsAboveValue:50] objectAtIndex:indexPath.row];
-  }
-    
-//    NSArray *items = [[ItemStore sharedStore] allItems];
-//    BNRItem *item = items[indexPath.row];
+    NSArray *items = [[ItemStore sharedStore] allItems];
+    BNRItem *item = items[indexPath.row];
   
     cell.textLabel.text = item.description;
     
@@ -61,28 +54,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    NSArray *items = [[ItemStore sharedStore] allItems];
-    
-    if ([[ItemStore sharedStore] numberOfItemsAboveValue:50] > 0) {
-        return 2;
-    }
-    
-//    for (id item in items) {
-//        if ([item valueInDollars] > 50) {
-//            return 2;
-//        }
-//    }
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 1) {
-        return [[ItemStore sharedStore] numberOfItemsAboveValue:50];
-    } else {
-        return [[[ItemStore sharedStore] allItems] count] - [[ItemStore sharedStore] numberOfItemsAboveValue:50];
-    }
+  return [[[ItemStore sharedStore] allItems] count];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

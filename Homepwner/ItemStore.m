@@ -58,57 +58,7 @@
 }
 
 
-- (int)numberOfItemsAboveValue:(int)value
-{
-    int count = 0;
-    
-    for (id item in self.privateItems) {
-        if ([item valueInDollars] > value) {
-            count++;
-        }
-    }
-    
-    return count;
-}
 
-- (int)numberOfItemsBelowValue:(int)value
-{
-    int count = 0;
-    
-    for (id item in self.privateItems) {
-        if ([item valueInDollars] <= value) {
-            count++;
-        }
-    }
-    
-    return count;
-}
-
-- (NSArray *)itemsAboveValue:(int)value
-{
-  NSMutableArray *items = [[NSMutableArray alloc] init];
-  
-  for (id item in [[ItemStore sharedStore] allItems]) {
-    if ([item valueInDollars] > value) {
-      [items addObject:item];
-    }
-  }
-  
-  return items;
-}
-
-- (NSArray *)itemsBelowValue:(int)value
-{
-  NSMutableArray *items = [[NSMutableArray alloc] init];
-  
-  for (id item in [[ItemStore sharedStore] allItems]) {
-    if ([item valueInDollars] <= value) {
-      [items addObject:item];
-    }
-  }
-  
-  return items;
-}
 
 
 

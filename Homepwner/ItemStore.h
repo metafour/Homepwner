@@ -17,10 +17,5 @@
 + (instancetype)sharedStore;
 
 - (BNRItem *)createItem;
-- (int)numberOfItemsAboveValue:(int)value;
-- (int)numberOfItemsBelowValue:(int)value;
-- (NSArray *)itemsAboveValue:(int)value;
-- (NSArray *)itemsBelowValue:(int)value;
-
 
 @end
