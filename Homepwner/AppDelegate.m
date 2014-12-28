@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ItemsViewController.h"
 
 @interface AppDelegate ()
 
@@ -16,8 +17,23 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    return YES;
+  // Override point for customization after application launch.
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  application.statusBarStyle = UIStatusBarStyleDefault;
+  
+  [self.window makeKeyAndVisible];
+  
+  ItemsViewController *ivc = [[ItemsViewController alloc] init];
+  ivc.navigationItem.title = @"Homepwner";
+  
+  UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:ivc];
+//  [navController.navigationBar setBarStyle:UIBarStyleBlack];
+  navController.navigationBar.barStyle = UIBarStyleBlack;
+  navController.navigationBar.barTintColor = [UIColor magentaColor];
+  
+  [self.window setRootViewController:navController];
+    
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
