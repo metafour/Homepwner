@@ -14,15 +14,16 @@
 
 - (instancetype)init
 {
-    // Call the superclass's designated initializer
-    self = [super initWithStyle:UITableViewStylePlain];
-    
-    if (self) {
-        for (int i = 0; i < 15; i++) {
-            [[ItemStore sharedStore] createItem];
-        }
+  // Call the superclass's designated initializer
+  self = [super initWithStyle:UITableViewStylePlain];
+
+  if (self) {
+    for (int i = 0; i < 5; i++) {
+      [[ItemStore sharedStore] createItem];
     }
-    return self;
+  }
+  
+  return self;
 }
 
 - (instancetype) initWithStyle:(UITableViewStyle)style
@@ -46,16 +47,34 @@
     BNRItem *item;
   
   if (indexPath.section == 0) {
-    item = [[[ItemStore sharedStore] itemsBelowValue:50] objectAtIndex:indexPath.row];
-  } else {
-    item = [[[ItemStore sharedStore] itemsAboveValue:50] objectAtIndex:indexPath.row];
+    
+    if (indexPath.row == [[[ItemStore sharedStore] itemsBelowValue:50] count]) {
+      cell.textLabel.text = @"No more items!";
+    }
+    else {
+      item = [[[ItemStore sharedStore] itemsBelowValue:50] objectAtIndex:indexPath.row];
+      cell.textLabel.text = item.description;
+      cell.textLabel.font = [UIFont systemFontOfSize:20.0];
+    }
+    
+  }
+  else {
+   
+    if (indexPath.row == [[[ItemStore sharedStore] itemsAboveValue:50] count]) {
+      cell.textLabel.text = @"No more items!";
+    }
+    else {
+      item = [[[ItemStore sharedStore] itemsAboveValue:50] objectAtIndex:indexPath.row];
+      cell.textLabel.text = item.description;
+      cell.textLabel.font = [UIFont systemFontOfSize:20.0];
+    }
+    
   }
     
 //    NSArray *items = [[ItemStore sharedStore] allItems];
 //    BNRItem *item = items[indexPath.row];
   
-    cell.textLabel.text = item.description;
-    
+  
     return cell;
 }
 
@@ -79,9 +98,9 @@
  numberOfRowsInSection:(NSInteger)section
 {
     if (section == 1) {
-        return [[ItemStore sharedStore] numberOfItemsAboveValue:50];
+        return [[ItemStore sharedStore] numberOfItemsAboveValue:50] + 1;
     } else {
-        return [[[ItemStore sharedStore] allItems] count] - [[ItemStore sharedStore] numberOfItemsAboveValue:50];
+        return [[[ItemStore sharedStore] allItems] count] - [[ItemStore sharedStore] numberOfItemsAboveValue:50] + 1;
     }
 }
 
@@ -99,6 +118,26 @@
             return @"Items";
             break;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  id sharedStore = [ItemStore sharedStore];
+  
+  if (indexPath.section == 0) {
+    if (indexPath.row == [[sharedStore itemsBelowValue:50] count]) {
+      return 44;
+    }
+  }
+  else {
+    if (indexPath.section == 1) {
+      if (indexPath.row == [[sharedStore itemsAboveValue:50] count]) {
+        return 44;
+      }
+    }
+  }
+  
+  return 60;
 }
 
 
