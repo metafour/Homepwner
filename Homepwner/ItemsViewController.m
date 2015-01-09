@@ -21,6 +21,7 @@
         for (int i = 0; i < 5; i++) {
             [[ItemStore sharedStore] createItem];
         }
+      self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
     }
     return self;
 }
@@ -37,19 +38,22 @@
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
 }
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleDefault;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
-  
-    NSArray *items = [[ItemStore sharedStore] allItems];
-    BNRItem *item = items[indexPath.row];
-  
-    cell.textLabel.text = item.description;
-    
-    return cell;
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
+
+  NSArray *items = [[ItemStore sharedStore] allItems];
+  BNRItem *item = items[indexPath.row];
+
+  cell.textLabel.text = item.description;
+
+  return cell;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -63,21 +67,22 @@
   return [[[ItemStore sharedStore] allItems] count];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    switch (section) {
-        case 0:
-            return @"Items < $50";
-            break;
-        case 1:
-            return @"Items > $50";
-            break;
-            
-        default:
-            return @"Items";
-            break;
-    }
-}
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//  return @"Items";
+//    switch (section) {
+//        case 0:
+//            return @"Items < $50";
+//            break;
+//        case 1:
+//            return @"Items > $50";
+//            break;
+//            
+//        default:
+//            return @"Items";
+//            break;
+//    }
+//}
 
 
 
