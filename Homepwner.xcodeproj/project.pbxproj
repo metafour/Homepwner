@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		010C32F01A60878A00DD1154 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 010C32EF1A60878A00DD1154 /* HeaderView.xib */; };
 		01F1D30F1A4E5F28000FC2A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F1D30E1A4E5F28000FC2A3 /* main.m */; };
 		01F1D3121A4E5F28000FC2A3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F1D3111A4E5F28000FC2A3 /* AppDelegate.m */; };
 		01F1D31A1A4E5F28000FC2A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01F1D3191A4E5F28000FC2A3 /* Images.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		010C32EF1A60878A00DD1154 /* HeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		01F1D3091A4E5F28000FC2A3 /* Homepwner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Homepwner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01F1D30D1A4E5F28000FC2A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01F1D30E1A4E5F28000FC2A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 				01F1D3391A4E6409000FC2A3 /* ItemStore.m */,
 				01F1D3321A4E6143000FC2A3 /* ItemsViewController.h */,
 				01F1D3331A4E6143000FC2A3 /* ItemsViewController.m */,
+				010C32EF1A60878A00DD1154 /* HeaderView.xib */,
 				01F1D3191A4E5F28000FC2A3 /* Images.xcassets */,
 				01F1D31B1A4E5F28000FC2A3 /* LaunchScreen.xib */,
 				01F1D30C1A4E5F28000FC2A3 /* Supporting Files */,
@@ -206,6 +209,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				010C32F01A60878A00DD1154 /* HeaderView.xib in Resources */,
 				01F1D31D1A4E5F28000FC2A3 /* LaunchScreen.xib in Resources */,
 				01F1D31A1A4E5F28000FC2A3 /* Images.xcassets in Resources */,
 			);
