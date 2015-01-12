@@ -40,6 +40,7 @@
     
     if (self) {
         _privateItems = [[NSMutableArray alloc] init];
+      [self.privateItems addObject:@"No more items!"];
     }
     
     return self;
@@ -52,7 +53,7 @@
 - (BNRItem *)createItem {
     BNRItem *item = [BNRItem randomItem];
     
-    [self.privateItems addObject:item];
+    [self.privateItems insertObject:item atIndex:[self.privateItems count] - 1];
     
     return item;
 }

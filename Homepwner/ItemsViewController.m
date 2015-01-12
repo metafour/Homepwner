@@ -18,6 +18,8 @@
 
 @implementation ItemsViewController
 
+
+
 - (instancetype)init
 {
     // Call the superclass's designated initializer
@@ -29,10 +31,14 @@
     return self;
 }
 
+
+
 - (instancetype) initWithStyle:(UITableViewStyle)style
 {
     return [self init];
 }
+
+
 
 - (void)viewDidLoad
 {
@@ -44,9 +50,15 @@
   [self.tableView setTableHeaderView:header];
 }
 
+
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleDefault;
 }
+
+
+#pragma mark UITableView Data Source Methods
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -55,6 +67,7 @@
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell" forIndexPath:indexPath];
 
   NSArray *items = [[ItemStore sharedStore] allItems];
+  
   BNRItem *item = items[indexPath.row];
 
   cell.textLabel.text = item.description;
@@ -62,16 +75,22 @@
   return cell;
 }
 
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView
  numberOfRowsInSection:(NSInteger)section
 {
   return [[[ItemStore sharedStore] allItems] count];
 }
+
+
 
 - (void)tableView:(UITableView *)tableView
 commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
@@ -84,9 +103,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     
     [[ItemStore sharedStore] removeItem:item];
     
-    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
   }
 }
+
+
 
 - (void)tableView:(UITableView *)tableView
 moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
@@ -94,6 +115,15 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 {
   [[ItemStore sharedStore] moveItemAtIndex:sourceIndexPath.row toIndex:destinationIndexPath.row];
 }
+
+
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return indexPath.row == [[[ItemStore sharedStore] allItems] count] - 1 ? NO : YES;
+}
+
+
 
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 //{
@@ -112,6 +142,19 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 //    }
 //}
 
+
+#pragma mark UITableView Delegate Methods
+
+
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return @"Remove";
+}
+
+
+#pragma mark Custom Methods
+
+
 - (UIView *)headerView
 {
   if (!_headerView) {
@@ -120,6 +163,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
   
   return _headerView;
 }
+
+
 
 - (IBAction)addNewItem:(id)sender
 {
@@ -131,6 +176,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
   
   [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
+
+
 
 - (IBAction)toggleEditingMode:(id)sender
 {
@@ -148,10 +195,8 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
   }
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-  return @"Remove";
-}
+
+
 
 
 
