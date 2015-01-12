@@ -151,6 +151,17 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
   return @"Remove";
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView
+targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
+       toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+  if (proposedDestinationIndexPath.row == [self.tableView numberOfRowsInSection:proposedDestinationIndexPath.section] - 1) {
+    return [NSIndexPath indexPathForRow:proposedDestinationIndexPath.row - 1 inSection:proposedDestinationIndexPath.section];
+  } else {
+    return proposedDestinationIndexPath;
+  }
+}
+
 
 #pragma mark Custom Methods
 
