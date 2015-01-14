@@ -69,7 +69,7 @@
 }
 
 
-#pragma mark UITableView Data Source Methods
+#pragma mark - UITableView Data Source Methods
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
@@ -155,7 +155,7 @@ moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 //}
 
 
-#pragma mark UITableView Delegate Methods
+#pragma mark - UITableView Delegate Methods
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -186,7 +186,7 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
 }
 
 
-#pragma mark Custom Methods
+#pragma mark - Custom Methods
 
 
 - (UIView *)headerView

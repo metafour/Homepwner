@@ -71,7 +71,12 @@
 #pragma mark overrides
 
 - (NSString *)description {
-    NSString *descriptionString = [[NSString alloc] initWithFormat:@"%@ (%@): Worth $%d, recorded on %@", self.itemName, self.serialNumber, self.valueInDollars, self.dateCreated];
+  
+  NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+  dateFormatter.dateStyle = NSDateFormatterLongStyle;
+  dateFormatter.timeStyle = NSDateFormatterMediumStyle;
+  
+    NSString *descriptionString = [[NSString alloc] initWithFormat:@"%@ (%@): Worth $%d, recorded on %@", self.itemName, self.serialNumber, self.valueInDollars, [dateFormatter stringFromDate:self.dateCreated]];
     return descriptionString;
 }
 
