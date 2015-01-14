@@ -9,6 +9,7 @@
 #import "ItemsViewController.h"
 #import "ItemStore.h"
 #import "BNRItem.h"
+#import "BNRDetailViewController.h"
 
 @interface ItemsViewController ()
 
@@ -26,7 +27,10 @@
     self = [super initWithStyle:UITableViewStylePlain];
     
     if (self) {
-      self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+//      self.tableView.contentInset = UIEdgeInsetsMake(10, 0, 0, 0);
+      self.navigationItem.title = @"Homepwner";
+      self.navigationItem.leftBarButtonItem = self.editButtonItem;
+      self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewItem:)];
     }
     return self;
 }
@@ -40,14 +44,22 @@
 
 
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:YES];
+  
+  [self.tableView reloadData];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"UITableViewCell"];
   
-  UIView *header = self.headerView;
-  [self.tableView setTableHeaderView:header];
+//  UIView *header = self.headerView;
+//  [self.tableView setTableHeaderView:header];
 }
 
 
@@ -160,6 +172,17 @@ targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath
   } else {
     return proposedDestinationIndexPath;
   }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  BNRDetailViewController *detailViewController = [[BNRDetailViewController alloc] init];
+  
+  BNRItem *selectedItem = [[[ItemStore sharedStore] allItems] objectAtIndex:indexPath.row];
+  
+  detailViewController.item = selectedItem;
+  
+  [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
 

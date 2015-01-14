@@ -23,13 +23,15 @@
   [self.window makeKeyAndVisible];
   
   ItemsViewController *ivc = [[ItemsViewController alloc] init];
-  [ivc setAutomaticallyAdjustsScrollViewInsets:NO];
+//  [ivc setAutomaticallyAdjustsScrollViewInsets:NO];
+  
+  UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:ivc];
   
   // Neither of these moves the TableView down bellow the status bar
 //  [ivc.view setBounds:CGRectMake(ivc.view.bounds.origin.x, ivc.view.bounds.origin.y, ivc.view.bounds.size.width, ivc.view.bounds.size.height - 50)];
 //  [ivc.view setFrame:CGRectMake(ivc.view.frame.origin.x, ivc.view.frame.origin.y, ivc.view.frame.size.width, ivc.view.frame.size.height - 50)];
   
-  [self.window setRootViewController:ivc];
+  [self.window setRootViewController:navController];
     
   return YES;
 }
