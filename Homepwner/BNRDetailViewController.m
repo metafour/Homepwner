@@ -20,17 +20,26 @@
 
 @implementation BNRDetailViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
   
   self.valueField.keyboardType = UIKeyboardTypeNumberPad;
+  self.nameField.delegate = self;
+  self.serialField.delegate = self;
+  self.valueField.delegate = self;
     // Do any additional setup after loading the view from its nib.
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -53,6 +62,8 @@
   
 }
 
+
+
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
@@ -66,6 +77,33 @@
   item.serialNumber = self.serialField.text;
   item.valueInDollars = [self.valueField.text intValue];
 }
+
+
+
+#pragma mark - UITextField Delegate Methods
+
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+  UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:textField action:@selector(resignFirstResponder)];
+  
+  self.navigationItem.rightBarButtonItem = doneButton;
+  
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+  self.navigationItem.rightBarButtonItem = nil;
+}
+
+
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+  
+}
+
 
 /*
 #pragma mark - Navigation
